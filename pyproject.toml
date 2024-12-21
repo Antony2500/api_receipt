@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "api_receipt"
+version = "0.1.0"
+description = ""
+authors = ["Antony2500 <toxa241ff@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = {extras = ["standart"], version = "^0.115.6"}
+uvicorn = "^0.34.0"
+alembic = "^1.14.0"
+itsdangerous = "^2.2.0"
+jwt = "^1.3.1"
+passlib = "^1.7.4"
+pydantic-settings = "^2.7.0"
+pydantic = {extras = ["email"], version = "^2.10.4"}
+asyncpg = "^0.30.0"
+pyjwt = "^2.10.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
