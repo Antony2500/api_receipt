@@ -96,5 +96,5 @@ async def create_product(
         product: CreateSalesReceiptProduct,
         db_session: DBSessionDep
 ):
-    new_user = await create_sales_receipt_product(db_session, product, UUID("ae897f62-de4f-4059-ae5f-f83e315f7c7d"))
-    return new_user
+    new_product = await create_sales_receipt_product(db_session, product, UUID("ae897f62-de4f-4059-ae5f-f83e315f7c7d"))
+    return new_product

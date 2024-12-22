@@ -14,5 +14,8 @@ class SalesReceiptProducts(Base):
     quantity: Mapped[Decimal] = mapped_column(Numeric(10, 0))
     total: Mapped[Decimal] = mapped_column(Numeric(10, 2))
 
+    product_id = mapped_column(ForeignKey("products.id"))
+    product: Mapped["Products"] = relationship("Products")
+
     receipt_id = mapped_column(ForeignKey("sales_receipts.id"))
     receipt: Mapped["SalesReceipt"] = relationship("SalesReceipt", back_populates="sales_receipt_products")
