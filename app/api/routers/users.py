@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from fastapi import APIRouter, Depends, Request, HTTPException
 from typing import Annotated, List
 
@@ -5,8 +7,11 @@ from app.api.dependencies.auth import validate_is_authenticated, validate_passwo
 from app.api.dependencies.user import CurrentUserDep, CurrentAdminDep
 from app.api.dependencies.core import DBSessionDep
 from app.crud.log import create_log
+from app.crud.sales_receipt import create_sales_receipt
+from app.crud.sales_receipt_products import create_sales_receipt_product
 from app.crud.user import (update_user_profile, create_password_token, create_new_password)
-
+from app.schemas.sales_receipt import CreateSalesReceipt
+from app.schemas.sales_receipt_products import CreateSalesReceiptProduct
 
 from app.schemas.user import (User, AuthorizedUser, UpdateProfile, ResetPasswordArgs)
 
@@ -79,3 +84,17 @@ async def reset_password(
 async def user_details(current_admin: CurrentAdminDep):
     return current_admin
 
+@router.post("/receipt")
+async def create_receipt(current_user: CurrentUserDep, db_session: DBSessionDep):
+    new_receipt = await create_sales_receipt(db_session, current_user.id)
+    return new_receipt
+
+
+@router.post("/product")
+async def create_product(
+        current_user: CurrentUserDep,
+        product: CreateSalesReceiptProduct,
+        db_session: DBSessionDep
+):
+    new_user = await create_sales_receipt_product(db_session, product, UUID("ae897f62-de4f-4059-ae5f-f83e315f7c7d"))
+    return new_user

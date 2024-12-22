@@ -1,4 +1,6 @@
 from datetime import datetime
+from decimal import Decimal
+
 from pydantic import BaseModel, Field, EmailStr, field_validator, PlainSerializer
 from typing import Annotated
 
@@ -34,3 +36,17 @@ class EmailArgs(BaseModel):
 
 class PasswordArgs(BaseModel):
     password: str = Field(min_length=8, max_length=128, examples=["password"])
+
+
+class Title(BaseModel):
+    title: str = Field(min_length=1, max_length=255, examples=["FPW Dron 6s"])
+
+
+class Price(BaseModel):
+    price: Decimal = Field(gt=0, decimal_places=2)
+
+
+class Total(BaseModel):
+    total: Decimal = Field(gt=0, decimal_places=2)
+
+
